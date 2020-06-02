@@ -1,5 +1,7 @@
 package com.jpabook;
 
+import com.jpabook.domain.Book;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -15,6 +17,16 @@ public class JpaMain {
         tx.begin();
 
         try{
+            Book book = Book.builder()
+                    .name("JPA")
+                    .price(1000)
+                    .author("aaron")
+                    .isbn("a001")
+                    .build();
+
+            em.persist(book);
+            em.flush();
+            em.clear();
             tx.commit();
         }catch (Exception e){
             tx.rollback();
